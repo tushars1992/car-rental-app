@@ -1,5 +1,13 @@
 # car-rental-app
 
+## About Project
+
+- Framework used : VueJS with Typescript
+- Vue-cli for build and boilerplate as its provides all the options like Typescript. ESLint , Jest ,Preprocessor 
+    to include in my project
+- Jest as unit test Framework
+- SASS preprocessor: for color variables and to include common css in my all files.
+
 ## Project setup
 ```
 npm install
@@ -25,5 +33,4 @@ npm run test:unit
 npm run lint
 ```
 
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+
