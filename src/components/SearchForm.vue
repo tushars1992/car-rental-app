@@ -14,27 +14,70 @@
         type="text"
         placeholder="Pick-up location"
         aria-describedby="Pick-up location"
-        v-model="searchText"
+        v-model.trim="searchText"
+        @input="searchLocation()"
+      />
+      <span class="loader d-inline-block p-absolute" v-show="isLoading"></span>
+      <SearchList
+        v-show="showList && !isError"
+        :list="resultList"
+        :count="resultCount"
       />
     </div>
+    <ErrorTile v-if="isError" />
   </form>
 </template>
 
 <script lang="ts">
 import Vue from "vue";
-
+import { getData } from "@/services";
+import { LocationResult, LocationItem } from "@/types";
+import SearchList from "@/components/SearchList.vue";
+import ErrorTile from "@/components/ErrorTile.vue";
 export default Vue.extend({
   name: "SearchForm",
+  components: {
+    SearchList,
+    ErrorTile,
+  },
   data() {
     return {
       searchText: "",
+      resultList: [] as Array<LocationItem>,
+      resultCount: 0,
+      showList: false,
+      isError: false,
+      isLoading: false,
     };
   },
-  methods: {},
+  methods: {
+    async searchLocation() {
+      if (this.searchText.length >= 2) {
+        this.isLoading = true;
+        try {
+          const { results }: LocationResult = await getData(this.searchText);
+          this.resultList = results.docs;
+          this.resultCount = results.numFound;
+          this.showList = true;
+          this.isError = false;
+        } catch (_) {
+          this.isError = true;
+          this.resultList = [] as Array<LocationItem>;
+        } finally {
+          this.isLoading = false;
+        }
+      } else {
+        this.showList = false;
+        this.resultList = [] as Array<LocationItem>;
+      }
+    },
+  },
 });
 </script>
 
 <style lang="scss" scoped>
+@import "@/assets/styles/_loader.scss";
+
 .search-form {
   background-color: $yellow-10;
   max-width: 100%;

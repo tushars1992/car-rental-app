@@ -1,13 +1,47 @@
-$red: #961412;
-$red-10: #e7e7e7;
-$green: #017c44;
-$black: #1a1a1a;
-$yellow: #b5b502;
-$yellow-10: #ffb700;
-$white:#ffffff;
-$blue: #0a63b0;
-$blue-10: #1879ca;
-$blue-20: #e7f4fe;
-$gray: #474747;
-$gray-10: #d9d9d9;
-$gray-20: #efefef;
+.d-flex {
+    display: flex;
+}
+
+.d-inline-block {
+    display: inline-block;
+}
+
+.align-center {
+    align-items: center;
+}
+
+.justify-center {
+    justify-content: center;
+}
+
+.flex-column {
+    flex-direction: column;
+}
+
+.text-center {
+    text-align: center;
+}
+
+.text-left {
+    text-align: left;
+}
+
+.p-relative {
+    position: relative;
+}
+
+.p-absolute {
+    position: absolute;
+}
+
+.font-small {
+    font-size: 12px;
+}
+
+h1 {
+    font-size: 32px;
+}
+
+h3 {
+    font-size: 20px;
+}
